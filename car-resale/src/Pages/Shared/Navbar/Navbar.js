@@ -92,7 +92,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a href="/" className="btn">
+        <a href="/blogs" className="btn">
           Blogs
         </a>
       </div>
