@@ -49,7 +49,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
-      <div className=" btn btn-ghost">
+      <div className="navbar-end ">
         <Link to="/blogs">Blogs</Link>
       </div>
     </div>
