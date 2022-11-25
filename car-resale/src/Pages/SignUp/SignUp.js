@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
-import useToken from "../../hooks/useToken";
+// import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const {
@@ -11,15 +11,15 @@ const SignUp = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
   const [createdUserEmail, setCreatedUserEmail] = useState("");
-  const [token] = useToken(createdUserEmail);
+  //   const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
-  if (token) {
-    navigate("/");
-  }
+  //   if (token) {
+  //     navigate("/");
+  //   }
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -32,12 +32,6 @@ const SignUp = () => {
         const userInfo = {
           displayName: data.name,
         };
-        updateUser(userInfo)
-          .then(() => {
-            saveUser(data.name, data.email);
-            // navigate("/");
-          })
-          .catch((err) => console.error(err));
       })
       .catch((err) => {
         console.error(err);
@@ -45,20 +39,20 @@ const SignUp = () => {
       });
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setCreatedUserEmail(email);
-      });
-  };
+//   const saveUser = (name, email) => {
+//     const user = { name, email };
+//     fetch("http://localhost:5000/users", {
+//       method: "POST",
+//       headers: {
+//         "content-type": "application/json",
+//       },
+//       body: JSON.stringify(user),
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         setCreatedUserEmail(email);
+//       });
+//   };
 
   return (
     <div className="h-[800px] flex justify-center items-center">
