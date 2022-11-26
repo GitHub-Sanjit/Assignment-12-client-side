@@ -13,7 +13,7 @@ const SignUp = () => {
   } = useForm();
   const { createUser } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
-  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  // const [createdUserEmail, setCreatedUserEmail] = useState("");
   //   const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
@@ -29,6 +29,7 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast("User Created Successfully");
+        
         const userInfo = {
           displayName: data.name,
         };
@@ -39,20 +40,20 @@ const SignUp = () => {
       });
   };
 
-//   const saveUser = (name, email) => {
-//     const user = { name, email };
-//     fetch("http://localhost:5000/users", {
-//       method: "POST",
-//       headers: {
-//         "content-type": "application/json",
-//       },
-//       body: JSON.stringify(user),
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setCreatedUserEmail(email);
-//       });
-//   };
+  //   const saveUser = (name, email) => {
+  //     const user = { name, email };
+  //     fetch("http://localhost:5000/users", {
+  //       method: "POST",
+  //       headers: {
+  //         "content-type": "application/json",
+  //       },
+  //       body: JSON.stringify(user),
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setCreatedUserEmail(email);
+  //       });
+  //   };
 
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -134,7 +135,10 @@ const SignUp = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+
+        <button className="btn btn-outline w-full">
+          <Link to="/login">CONTINUE WITH GOOGLE</Link>
+        </button>
       </div>
     </div>
   );
