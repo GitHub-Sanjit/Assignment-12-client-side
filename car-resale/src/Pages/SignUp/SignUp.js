@@ -1,3 +1,4 @@
+import { updateCurrentUser } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -11,9 +12,9 @@ const SignUp = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
-  // const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
   //   const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
@@ -29,10 +30,14 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast("User Created Successfully");
-        
+
         const userInfo = {
           displayName: data.name,
         };
+        updateUser(userInfo).then(() => {
+          saveUser(data.name, data.email);
+          navigate("/");
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -40,20 +45,21 @@ const SignUp = () => {
       });
   };
 
-  //   const saveUser = (name, email) => {
-  //     const user = { name, email };
-  //     fetch("http://localhost:5000/users", {
-  //       method: "POST",
-  //       headers: {
-  //         "content-type": "application/json",
-  //       },
-  //       body: JSON.stringify(user),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setCreatedUserEmail(email);
-  //       });
-  //   };
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("save user", data);
+        setCreatedUserEmail(email);
+      });
+  };
 
   return (
     <div className="h-[800px] flex justify-center items-center">
