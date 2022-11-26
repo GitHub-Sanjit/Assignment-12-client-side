@@ -56,8 +56,20 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        getUserToken(email);
         console.log("save user", data);
         setCreatedUserEmail(email);
+      });
+  };
+
+  const getUserToken = (email) => {
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          navigate("/");
+        }
       });
   };
 
