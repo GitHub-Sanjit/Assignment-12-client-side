@@ -25,7 +25,7 @@ const SignUp = () => {
   const handleSignUp = (data) => {
     console.log(data);
     setSignUpError("");
-    createUser(data.email, data.password)
+    createUser(data.email, data.password, data.role)
       .then((result) => {
         const user = result.user;
         console.log(user);
@@ -35,7 +35,7 @@ const SignUp = () => {
           displayName: data.name,
         };
         updateUser(userInfo).then(() => {
-          saveUser(data.name, data.email);
+          saveUser(data.name, data.email, data.role);
           navigate("/");
         });
       })
@@ -45,8 +45,8 @@ const SignUp = () => {
       });
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -125,6 +125,15 @@ const SignUp = () => {
               </p>
             )}
             <br />
+          </div>
+          <div className="form-control w-full max-w-xs shadow bg-base-100 rounded-box mb-4">
+            <label className="label">
+              <span className="label-text">Role</span>
+            </label>
+            <select {...register("role")}>
+              <option value="user">user</option>
+              <option value="seller">seller</option>
+            </select>
           </div>
           <input
             className="btn btn-accent w-full"
