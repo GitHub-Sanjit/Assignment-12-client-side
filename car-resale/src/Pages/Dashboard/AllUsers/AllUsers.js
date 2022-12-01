@@ -1,11 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../context/AuthProvider";
 
 const AllUsers = () => {
+  const { user } = useContext(AuthContext);
+
+  const url = `http://localhost:5000/users?email=${user?.email}`;
+
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users");
+      // const res = await fetch("http://localhost:5000/users");
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -17,10 +27,10 @@ const AllUsers = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>NO.</th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Email</th>
+              <th>Role</th>
               <th>Favorite Color</th>
             </tr>
           </thead>
