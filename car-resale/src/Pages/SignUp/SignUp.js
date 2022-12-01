@@ -1,4 +1,4 @@
-import { updateCurrentUser } from "firebase/auth";
+import { GoogleAuthProvider, updateCurrentUser } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -12,7 +12,8 @@ const SignUp = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, providerLogin } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
   const [signUpError, setSignUpError] = useState("");
   const [createdUserEmail, setCreatedUserEmail] = useState("");
   //   const [token] = useToken(createdUserEmail);
@@ -70,6 +71,27 @@ const SignUp = () => {
           localStorage.setItem("accessToken", data.accessToken);
           navigate("/");
         }
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast("User Created Successfully");
+
+        const userInfo = {
+          displayName: user.displayName,
+        };
+        updateUser(userInfo).then(() => {
+          saveUser(userInfo.displayName, user.email, (user.role = "buyers"));
+          navigate("/");
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        setSignUpError(err.message);
       });
   };
 
@@ -163,7 +185,7 @@ const SignUp = () => {
         </p>
         <div className="divider">OR</div>
 
-        <button className="btn btn-outline w-full">
+        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
           <Link to="/login">CONTINUE WITH GOOGLE</Link>
         </button>
       </div>

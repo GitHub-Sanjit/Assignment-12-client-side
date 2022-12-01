@@ -1,5 +1,7 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 // import useToken from "../../hooks/useToken";
@@ -10,7 +12,9 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { signIn } = useContext(AuthContext);
+  const { signIn, updateUser, providerLogin } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+
   const [loginError, setLoginError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState("");
   // const [token] = useToken(loginUserEmail);
@@ -35,6 +39,43 @@ const Login = () => {
       .catch((err) => {
         console.log(err.message);
         setLoginError(err.message);
+      });
+  };
+
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // getUserToken(email);
+        console.log("save user", data);
+        // setCreatedUserEmail(email);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast("User Created Successfully");
+
+        const userInfo = {
+          displayName: user.displayName,
+        };
+        updateUser(userInfo).then(() => {
+          saveUser(userInfo.displayName, user.email, (user.role = "buyers"));
+          navigate("/");
+        });
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -98,7 +139,9 @@ const Login = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
+          CONTINUE WITH GOOGLE
+        </button>
       </div>
     </div>
   );
