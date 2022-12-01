@@ -36,9 +36,9 @@ const Login = () => {
         console.log(user);
         setLoginUserEmail(data.email);
       })
-      .catch((err) => {
-        console.log(err.message);
-        setLoginError(err.message);
+      .catch((error) => {
+        console.log(error.message);
+        setLoginError(error.message);
       });
   };
 
