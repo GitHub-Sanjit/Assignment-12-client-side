@@ -1,0 +1,86 @@
+[
+    {
+        "category":"Luxury Car",
+        "categoryImg":"https://www.cartoq.com/wp-content/uploads/2021/07/used-luxury-cars-featured.jpg",
+        "products":[
+          {
+            "productsImg":"https://www.autoguide.com/blog/wp-content/uploads/2017/08/8-Important-Tips-for-Buying-a-Used-Luxury-Car.jpg",
+            "productName":"Mercedes-Benz",
+            "originalPrice":"2000",
+            "resalePrice":"1500",
+            "location":"Jashore",
+            "UsedTime":"4y",
+            "ownerName":"Jack",
+            "postedTime":"Nov 25,2022"
+            
+          },
+          {
+            "productsImg":"https://images.lifestyleasia.com/wp-content/uploads/sites/7/2021/09/23014240/shutterstock_613524686.jpg",
+            "productName":"Lamborghini",
+            "originalPrice":"2000",
+            "resalePrice":"1500",
+            "location":"Khulna",
+            "UsedTime":"4y",
+            "ownerName":"Jack",
+            "postedTime":"Nov 25,2022"
+            
+          }
+        ]
+    },
+    {
+        "category":"Electric Car",
+        "categoryImg":"https://www.transportenvironment.org/wp-content/uploads/2021/12/plugged-chargers-into-two-electric-cars-charge-station-scaled.jpg",
+        "products":[
+          {
+            "productsImg":"https://www.motoringelectric.com/wp-content/uploads/2021/04/nmgbgreen-71.jpg",
+            "productName":"Tata Nexon EV Prime",
+            "originalPrice":"2000",
+            "resalePrice":"1500",
+            "location":"Dhaka",
+            "UsedTime":"4y",
+            "ownerName":"Jack",
+            "postedTime":"Nov 25,2022"
+            
+          },
+          {
+            "productsImg":"https://www.gumtree.com/info/cars/wp-content/uploads/sites/2/2022/02/A-Guide-to-Buying-a-Second-Hand-Electric-Car-electric-car.jpg",
+            "productName":"Mahindra E Verito",
+            "originalPrice":"2000",
+            "resalePrice":"1500",
+            "location":"Jashore",
+            "UsedTime":"4y",
+            "ownerName":"Jack",
+            "postedTime":"Nov 25,2022"
+            
+          }
+        ]
+    },
+    {
+        "category":"Sports Car",
+        "categoryImg":"https://www.topgear.com/sites/default/files/cars-car/image/2022/08/1-Mercedes-AMG-One.jpg",
+        "products":[
+          {
+            "productsImg":"https://www.grandprix247.com/wp-content/uploads/2021/01/car-5852408_1920.jpg",
+            "productName":"Mazda MX-5.",
+            "originalPrice":"2000",
+            "resalePrice":"1500",
+            "location":"Jashore",
+            "UsedTime":"4y",
+            "ownerName":"Jack",
+            "postedTime":"Nov 25,2022"
+            
+          },
+          {
+            "productsImg":"https://image.cnbcfm.com/api/v1/image/107117812-1663090308312-01_Front34_1a_HR_A4.jpg?v=1663093071",
+            "productName":"BMW M3/M4.",
+            "originalPrice":"2000",
+            "resalePrice":"1500",
+            "location":"Mymenshing",
+            "UsedTime":"4y",
+            "ownerName":"Jack",
+            "postedTime":"Nov 25,2022"
+            
+          }
+        ]
+    }
+]
