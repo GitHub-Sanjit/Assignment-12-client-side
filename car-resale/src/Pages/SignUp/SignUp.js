@@ -17,12 +17,12 @@ const SignUp = () => {
   const googleProvider = new GoogleAuthProvider();
   const [signUpError, setSignUpError] = useState("");
   const [createdUserEmail, setCreatedUserEmail] = useState("");
-    const [token] = useToken(createdUserEmail);
+  const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
-    if (token) {
-      navigate("/");
-    }
+  if (token) {
+    navigate("/");
+  }
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -49,13 +49,16 @@ const SignUp = () => {
 
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
+    fetch(
+      "https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/users",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("save user", data);
@@ -64,7 +67,7 @@ const SignUp = () => {
   };
 
   // const getUserToken = (email) => {
-  //   fetch(`http://localhost:5000/jwt?email=${email}`)
+  //   fetch(`https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/jwt?email=${email}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       if (data.accessToken) {

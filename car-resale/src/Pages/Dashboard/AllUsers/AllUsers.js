@@ -6,12 +6,12 @@ import { AuthContext } from "../../../context/AuthProvider";
 const AllUsers = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/users?email=${user?.email}`;
+  const url = `https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/users?email=${user?.email}`;
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      // const res = await fetch("http://localhost:5000/users");
+      // const res = await fetch("https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/users");
       const res = await fetch(url, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -23,12 +23,15 @@ const AllUsers = () => {
   });
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/users/admin/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {

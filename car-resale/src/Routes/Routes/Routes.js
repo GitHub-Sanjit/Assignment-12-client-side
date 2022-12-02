@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         element: <Products></Products>,
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/productsCategories/${params.id}`
+            `https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/productsCategories/${params.id}`
           ),
       },
     ],

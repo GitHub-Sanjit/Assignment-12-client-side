@@ -5,13 +5,14 @@ import { AuthContext } from "../../../context/AuthProvider";
 
 const AllSellers = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
 
-  const url = `http://localhost:5000/users?role=${user?.role}`;
+  const url = `https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/users/seller?email=${user?.email}`;
 
   const { data: sellers = [], refetch } = useQuery({
     queryKey: ["seller"],
     queryFn: async () => {
-      // const res = await fetch("http://localhost:5000/users");
+      // const res = await fetch("https://b612-used-products-resale-server-side-sanjitweb479.vercel.app/users");
       const res = await fetch(url, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
